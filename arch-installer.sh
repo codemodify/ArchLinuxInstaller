@@ -24,7 +24,7 @@ function AreRequirementsSatisfied() {
 }
 
 function Install() {
-    local canContinue=$(AreRequirementsSatisfied())
+    local canContinue=$(AreRequirementsSatisfied)
     echo $canContinue
     if [$canContinue !-eq "true"] ; then 
         return
