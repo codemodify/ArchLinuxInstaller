@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-local BootDevice=$1 # Required
-local SwapDevice=$2 # Optional, can be "none"
-local RootDevice=$3 # Required
+set BootDevice=$1 # Required
+set SwapDevice=$2 # Optional, can be "none"
+set RootDevice=$3 # Required
 
 function AreRequirementsSatisfied() {
     local satisfied=true
