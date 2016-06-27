@@ -31,6 +31,6 @@ function Install() {
     fi
 }
 
-Install()
+Install
 
 #locale-gen
