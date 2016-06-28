@@ -5,20 +5,20 @@ set SwapDevice=$2 # Optional, can be "none"
 set RootDevice=$3 # Required
 
 function AreRequirementsSatisfied() {
-    local satisfied=true
+    local satisfied=1
 
     if ! [ -b $BootDevice ] ; then
-        satisfied=false
+        satisfied=0
         echo "$BootDevice does not exist to be used as 'boot', run cfdisk and create it."
     fi
 
     if [ $SwapDevice -ne "none" ] && ! [ -b $SwapDevice ] ; then
-        satisfied=false
+        satisfied=0
         echo "$SwapDevice does not exist to be used as 'swap', run cfdisk and create it."
     fi
 
     if ! [ -b $RootDevice ] ; then
-        satisfied=false
+        satisfied=0
         echo "$RootDevice does not exist to be used as 'root', run cfdisk and create it."
     fi
 
@@ -28,7 +28,7 @@ function AreRequirementsSatisfied() {
 function Install() {
     local canContinue=$(AreRequirementsSatisfied)
     echo $canContinue
-    if [$canContinue !-eq "true"] ; then 
+    if [ $canContinue -ne 1 ] ; then 
         return
     fi
 }
