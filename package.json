@@ -1,0 +1,10 @@
+{
+    "name": "ArchInstaller",
+    "version": "1",
+    "devDependencies" : {
+        "tsc" : "*"
+    },
+    "scripts": {
+        "tsc": "tsc"
+    }
+}
