@@ -14,5 +14,5 @@ npm install
 
 # Run the installer
 curl -o ArchInstaller.ts https://raw.githubusercontent.com/nic0lae/ArchLinuxInstaller/master/ArchLinuxInstaller.ts
-tsc ./ArchInstaller.ts
+npm run tsc ./ArchInstaller.ts
 #node ./ArchInstaller.js
