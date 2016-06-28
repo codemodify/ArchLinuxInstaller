@@ -7,7 +7,7 @@ set RootDevice=$3 # Required
 function AreRequirementsSatisfied() {
     local satisfied=true
 
-    if ![ -b $BootDevice ]
+    if ! [ -b $BootDevice ]
     then
         satisfied=false
         echo "$BootDevice does not exist to be used as 'boot', run cfdisk and create it."
@@ -17,6 +17,7 @@ function AreRequirementsSatisfied() {
         satisfied=false
         echo "$SwapDevice does not exist to be used as 'swap', run cfdisk and create it."
     fi
+
     if ![ -b $RootDevice] ; then
         satisfied=false
         echo "$RootDevice does not exist to be used as 'root', run cfdisk and create it."
