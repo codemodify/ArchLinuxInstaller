@@ -28,7 +28,7 @@ function AreRequirementsSatisfied() {
 function Install() {
     local canContinue=$(AreRequirementsSatisfied)
     echo $canContinue
-    if [ $canContinue != 1 ] ; then 
+    if [ "$canContinue" != "1" ] ; then 
         return
     fi
 }
