@@ -12,7 +12,7 @@ function AreRequirementsSatisfied() {
         echo "$BootDevice does not exist to be used as 'boot', run cfdisk and create it."
     fi
 
-    if [ $SwapDevice -ne "none" ] && ! [ -b $SwapDevice ] ; then
+    if ! [ $SwapDevice -eq "none" ] && ! [ -b $SwapDevice ] ; then
         satisfied=0
         echo "$SwapDevice does not exist to be used as 'swap', run cfdisk and create it."
     fi
@@ -28,7 +28,7 @@ function AreRequirementsSatisfied() {
 function Install() {
     local canContinue=$(AreRequirementsSatisfied)
     echo $canContinue
-    if [ $canContinue -ne 1 ] ; then 
+    if ! [ $canContinue -eq 1 ] ; then 
         return
     fi
 }
