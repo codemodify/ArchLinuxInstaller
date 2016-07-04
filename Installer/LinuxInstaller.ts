@@ -147,7 +147,7 @@ namespace LinuxInstaller.Logging {
 
             var isoDate = (new Date()).toISOString();
             
-            var message = new Buffer("<22>1 " + isoDate + " " + this._id + " LinuxInstaller - - - " + log);
+            var message = new Buffer("<22>1 " + isoDate + " LinuxInstaller " + this._id + " - - - " + log);
 
             this._udpClient.send(message, 0, message.length, k_PORT, k_HOST, function(err, bytes) {
                 if (err) {
