@@ -1,8 +1,8 @@
 /// <reference path="LinuxInstaller.ts"/>
 
 namespace LinuxInstaller.Arch {
-    export class Installer extends Contracts.Runnable {
-        protected OnRun() {
+    export class Installer extends Contracts.Installer {
+        protected OnRun(parentDone: any) {
             Helpers.Output().Clear();
 
             var partitionningTask: DiskPartitionTask = new DiskPartitionTask();
@@ -20,6 +20,7 @@ namespace LinuxInstaller.Arch {
                     task.Run(done);
                 })
                 .Then(function (done){
+                    parentDone();
                     done();
                 })
                 .OnError(function (error){
@@ -132,4 +133,4 @@ namespace LinuxInstaller.Arch {
     }
 }
 
-(new LinuxInstaller.Arch.Installer()).Run();
+(new LinuxInstaller.Arch.Installer()).Execute();

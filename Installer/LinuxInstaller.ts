@@ -20,6 +20,12 @@ namespace LinuxInstaller.Contracts {
 
         protected abstract OnRun(done: any);
     }
+
+    export abstract class Installer extends Runnable {
+        public Execute() {
+            this.Run(function (){});
+        }
+    }
 }
 
 namespace LinuxInstaller.Logging {
