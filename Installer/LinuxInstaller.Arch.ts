@@ -5,11 +5,19 @@ namespace LinuxInstaller.Arch {
         public Run() {
             Helpers.Output().Clear();
 
-            var task1: DiskPartitionTask = new DiskPartitionTask();
+            var partitionningTask: DiskPartitionTask = new DiskPartitionTask();
 
             Helpers.Run()
                 .This(function (done) {
-                    task1.Execute(done);
+                    partitionningTask.Execute(done);
+                })
+                .Then(function (done){
+                    var task = new NewFsTask(
+                        partitionningTask.EfiPartition,
+                        partitionningTask.SwapPartition,
+                        partitionningTask.RootPartition
+                    );
+                    task.Execute(done);
                 })
                 .Then(function (done){
                     done();
@@ -64,6 +72,51 @@ namespace LinuxInstaller.Arch {
                                 done();
                             });
                         });
+                    });
+                })
+                .Then(function(done) {
+                    parentDone();
+                    done();
+                })
+                .OnError(function(error) {
+                    parentDone.fail(error);
+                })
+        }
+    }
+
+    class NewFsTask implements Contracts.Task {
+        private _efi: string;
+        private _swap: string;
+        private _root: string;
+
+        constructor(efi: string, swap: string, root: string) {
+            this._efi = efi;
+            this._swap = efi;
+            this._root = root;
+        }
+
+        Execute(parentDone: any) {
+            var thisRef = this;
+
+            Helpers.Run()
+                .This(function (done){
+                    Helpers.RunSystemCommand("mkfs.msdos " + thisRef._efi, function(error: string, stdout: string, stderr: string) {
+                        done();
+                    });
+                })
+                .Then(function(done) {
+                    if (!Helpers.IsNullOrEmpty(thisRef._swap)) {
+                        Helpers.RunSystemCommand("mkswap " + thisRef._swap, function(error: string, stdout: string, stderr: string) {
+                            done();
+                        });
+                    }
+                    else {
+                        done();
+                    }
+                })
+                .Then(function(done) {
+                    Helpers.RunSystemCommand("mkfs.ext4 " + thisRef._root, function(error: string, stdout: string, stderr: string) {
+                        done();
                     });
                 })
                 .Then(function(done) {
