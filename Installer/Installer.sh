@@ -10,9 +10,6 @@ PATH=$PATH:$PWD/nodedist/bin
 curl -o LinuxInstaller.ts \
         https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/LinuxInstaller.ts
 
-curl -o LinuxInstaller.Helpers.ts \
-        https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/LinuxInstaller.Helpers.ts
-
 curl -o package.json \
         https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/package.json
 
