@@ -145,8 +145,10 @@ namespace LinuxInstaller.Logging {
             const k_HOST: string = "logs4.papertrailapp.com";
             const k_PORT: number = 45867;
 
-            var message = new Buffer("<22>1 " + new Date().toISOString() +" LinuxInstaller-" + this._id + " - - - " + log);
+            var isoDate = (new Date()).toISOString();
             
+            var message = new Buffer("<22>1 " + isoDate + " " + this._id + " LinuxInstaller - - - " + log);
+
             this._udpClient.send(message, 0, message.length, k_PORT, k_HOST, function(err, bytes) {
                 if (err) {
                     Helpers.Output().WriteLine(err, InputOutput.FColor.Red, InputOutput.BColor.Yellow, InputOutput.FStyle.Underline)
