@@ -13,7 +13,11 @@ namespace LinuxInstaller.Contracts {
     export abstract class Installer {
         protected _tasks: Contracts.Task[];
 
-        public abstract ConfigureTasks();
+        constructor() {
+            this.ConfigureTasks();
+        }
+
+        protected abstract ConfigureTasks();
 
         public Run() {
             if (this._tasks === null)

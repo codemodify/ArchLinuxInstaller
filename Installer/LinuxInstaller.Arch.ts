@@ -2,7 +2,12 @@
 
 namespace LinuxInstaller.Arch {
     export class Installer extends Contracts.Installer {
-        public ConfigureTasks() {
+
+        constructor() {
+            super();
+        }
+
+        protected ConfigureTasks() {
             this._tasks = [
                 new DiskPartitionTask()
             ];
