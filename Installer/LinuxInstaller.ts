@@ -368,9 +368,9 @@ namespace LinuxInstaller.Helpers {
         return _logger;
     }
 
-    export function RunSystemCommand(command: string, args: string, onFinish: Contracts.CmdExecDelegate) {
-        var exec = require("child_process").execFile;
-        exec(command, args, "", function(error, stdout, stderr) {            
+    export function RunSystemCommand(commandWithArgs: string, onFinish: Contracts.CmdExecDelegate) {
+        var exec = require("child_process").exec;
+        exec("/bin/sh -c " + commandWithArgs, function(error, stdout, stderr) {            
             onFinish(error, stdout, stderr);
         });
     }
