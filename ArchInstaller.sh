@@ -9,7 +9,7 @@ mv node-*-linux-* nodedist
 PATH=$PATH:/temp-ArchInstaller/nodedist/bin
 
 # NodeJS is ready, prep the Installer's dependencies
-curl -o package.json https://raw.githubusercontent.com/nic0lae/ArchLinuxInstaller/master/package.json
+curl -o package.json https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/package.json
 npm install
 
 # Run the installer
