@@ -41,10 +41,7 @@ namespace LinuxInstaller.Arch {
 
                     Helpers.Logger().LogInfo("Step " + cmd);
 
-                    Helpers.RunSystemCommand(cmd, function(error: string, stdout: string, stderr: string) {
-                        Helpers.Output().WriteRed(error);
-                        Helpers.Output().WriteRed(stdout);
-                        Helpers.Output().WriteRed(stderr);
+                    Helpers.RunSystemCommand(cmd, "", function() {
                         done();
                     });
                 })
