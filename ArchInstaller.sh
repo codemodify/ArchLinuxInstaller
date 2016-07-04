@@ -4,7 +4,7 @@
 curl -o Installer.sh https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/Installer.sh
 chmod +x ./Installer.sh
 ./Installer.sh
-PATH=$PATH:/temp-ArchInstaller/nodedist/bin
+PATH=$PATH:$HOME/temp-ArchInstaller/nodedist/bin
 
 # Run the installer
 curl -o LinuxInstaller.Arch.ts \
