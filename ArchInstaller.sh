@@ -10,5 +10,5 @@ PATH=$PATH:$PWD/nodedist/bin
 curl -o LinuxInstaller.Arch.ts \
         https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/LinuxInstaller.Arch.ts
 
-npm run tsc
+npm run compile
 node LinuxInstaller.js
