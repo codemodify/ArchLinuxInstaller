@@ -13,10 +13,6 @@ namespace LinuxInstaller.Contracts {
     export abstract class Installer {
         protected _tasks: Contracts.Task[];
 
-        constructor(tasks: Contracts.Task[]) {
-            this._tasks = tasks;
-        }
-
         public abstract ConfigureTasks();
 
         public Run() {
@@ -76,10 +72,6 @@ namespace LinuxInstaller.Logging {
             return formattedLog;
         }
     }
-
-    export class NoLogger implements ILogger {
-        public Log(logEntity: LogEntity) {}        
-    }
     
     export abstract class AbstractLogger implements ILogger, ILoggerImpl {
         private _logFormatter: ILogFormatter;
@@ -107,6 +99,10 @@ namespace LinuxInstaller.Logging {
         }
 
         protected abstract OnLog(log: string);
+    }
+
+    export class NoLogger extends AbstractLogger {
+        protected OnLog(log: string) {}      
     }
 
     export class ConsoleLogger extends AbstractLogger {

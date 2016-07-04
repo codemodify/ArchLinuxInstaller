@@ -8,11 +8,14 @@ tar -xf node.gz
 mv node-*-linux-* nodedist
 PATH=$PATH:/temp-ArchInstaller/nodedist/bin
 
-# NodeJS is ready, prep the Installer's dependencies
+# NodeJS is ready, Installer's dependencies
 curl -o package.json https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/package.json
 npm install
 
+
 # Run the installer
-curl -o ArchInstaller.ts https://raw.githubusercontent.com/nic0lae/ArchLinuxInstaller/master/ArchLinuxInstaller.ts
-npm run tsc ./ArchInstaller.ts
-#node ./ArchInstaller.js
+curl -o LinuxInstaller.Arch.ts \
+        https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/LinuxInstaller.Arch.ts
+
+npm run tsc
+node LinuxInstaller.Arch.js

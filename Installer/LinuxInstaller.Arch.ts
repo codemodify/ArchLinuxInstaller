@@ -1,7 +1,7 @@
 /// <reference path="LinuxInstaller.ts"/>
 
 namespace LinuxInstaller.Arch {
-    class Installer extends Contracts.Installer {
+    export class Installer extends Contracts.Installer {
         public ConfigureTasks() {
             this._tasks = [
                 new DiskPartitionTask()
@@ -20,5 +20,7 @@ namespace LinuxInstaller.Arch {
                 Helpers.Logger().LogError(error);
             });
         }
-    }    
+    }
 }
+
+(new LinuxInstaller.Arch.Installer()).Run();
