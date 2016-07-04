@@ -11,4 +11,4 @@ curl -o LinuxInstaller.Arch.ts \
         https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/LinuxInstaller.Arch.ts
 
 npm run tsc
-#node LinuxInstaller.Arch.js
+node LinuxInstaller.Arch.js

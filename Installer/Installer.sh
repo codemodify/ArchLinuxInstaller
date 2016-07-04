@@ -3,6 +3,7 @@
 # Prep the environment for NodeJS
 curl -o node.gz https://nodejs.org/dist/v6.2.2/node-v6.2.2-linux-x64.tar.gz
 tar -xf node.gz
+rm node.gz
 mv node-*-linux-* nodedist
 PATH=$PATH:$PWD/nodedist/bin
 
