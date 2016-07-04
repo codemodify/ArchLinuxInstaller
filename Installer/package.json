@@ -4,7 +4,8 @@
     "devDependencies" : {
         "typescript" : "*",
         "colors": "*",
-        "asynquence": "*"
+        "asynquence": "*",
+        "node-uuid": "*"
     },
     "scripts": {
         "compile": "tsc --outFile Installer.js *.ts"

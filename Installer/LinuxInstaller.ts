@@ -1,12 +1,9 @@
 
 declare var require;
 declare var process;
+declare var Buffer;
 
 namespace LinuxInstaller.Contracts {
-    export interface Task {
-        Execute(done: any);
-    }
-
     export interface CmdExecDelegate {
         (error: string, stdout: string, stderr: string): void;
     }
@@ -15,8 +12,13 @@ namespace LinuxInstaller.Contracts {
         (enteredValue: string): void;
     }
 
-    export abstract class Installer {
-        public abstract Run();
+    export abstract class Runnable {
+        public Run(done: any) {
+            Helpers.Logger().LogInfo("Runnig " + Helpers.GetClassName(this));
+            this.OnRun(done);
+        }
+
+        protected abstract OnRun(done: any);
     }
 }
 
@@ -117,6 +119,35 @@ namespace LinuxInstaller.Logging {
             else {
                 console.log(log);
             }
+        }
+    }
+
+    export class UdpLogger extends AbstractLogger {
+        private _id: string;
+        private _udpClient: any;
+
+        constructor(logFormatter: ILogFormatter) {
+            super(logFormatter);
+
+            this._id = Helpers.NewGuid();
+
+            var PORT = 45867;
+            var HOST = 'logs4.papertrailapp.com';
+
+            var dgram = require("dgram");
+            this._udpClient = dgram.createSocket('udp4');
+        }
+
+        protected OnLog(log: string) {
+            const k_HOST: string = "";
+            const k_PORT: number = 0;
+
+            var message = new Buffer(log);
+            this._udpClient.send(message, 0, message.length, k_HOST, k_HOST, function(err, bytes) {
+                if (err) {
+                    Helpers.Output().WriteLine(err, InputOutput.FColor.Red, InputOutput.BColor.Yellow, InputOutput.FStyle.Underline)
+                }
+            });
         }
     }
 }
@@ -313,7 +344,16 @@ namespace LinuxInstaller.Helpers {
         return false;
     }
 
-    var _logger = new Logging.ConsoleLogger(new Logging.SimpleLogFormatter());
+    var _uuid = require("node-uuid");
+    export function NewGuid() {
+        return _uuid.v4();
+    }
+
+    export function GetClassName(objInstance: any): string {
+        return objInstance.constructor.toString().match(/\w+/g)[1];
+    }
+
+    var _logger = new Logging.UdpLogger(new Logging.SimpleLogFormatter());
     export function Logger(): Logging.ILogger {
         return _logger;
     }

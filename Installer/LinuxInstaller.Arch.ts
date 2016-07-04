@@ -1,15 +1,15 @@
 /// <reference path="LinuxInstaller.ts"/>
 
 namespace LinuxInstaller.Arch {
-    export class Installer extends Contracts.Installer {
-        public Run() {
+    export class Installer extends Contracts.Runnable {
+        protected OnRun() {
             Helpers.Output().Clear();
 
             var partitionningTask: DiskPartitionTask = new DiskPartitionTask();
 
             Helpers.Run()
                 .This(function (done) {
-                    partitionningTask.Execute(done);
+                    partitionningTask.Run(done);
                 })
                 .Then(function (done){
                     var task = new NewFsTask(
@@ -17,7 +17,7 @@ namespace LinuxInstaller.Arch {
                         partitionningTask.SwapPartition,
                         partitionningTask.RootPartition
                     );
-                    task.Execute(done);
+                    task.Run(done);
                 })
                 .Then(function (done){
                     done();
@@ -28,12 +28,12 @@ namespace LinuxInstaller.Arch {
         }
     }
 
-    class DiskPartitionTask implements Contracts.Task {
+    class DiskPartitionTask extends Contracts.Runnable {
         public EfiPartition: string;
         public SwapPartition: string;
         public RootPartition: string;
 
-        Execute(parentDone: any) {
+        protected OnRun(parentDone: any) {
             var thisRef = this;
 
             var cmd: string = "cfdisk";
@@ -84,18 +84,20 @@ namespace LinuxInstaller.Arch {
         }
     }
 
-    class NewFsTask implements Contracts.Task {
+    class NewFsTask extends Contracts.Runnable {
         private _efi: string;
         private _swap: string;
         private _root: string;
 
         constructor(efi: string, swap: string, root: string) {
+            super();
+
             this._efi = efi;
             this._swap = efi;
             this._root = root;
         }
 
-        Execute(parentDone: any) {
+        protected OnRun(parentDone: any) {
             var thisRef = this;
 
             Helpers.Run()
