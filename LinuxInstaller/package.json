@@ -1,0 +1,10 @@
+{
+    "name": "LinuxInstaller",
+    "version": "1.0.0",
+    "devDependencies" : {
+        "tsc" : "*"
+    },
+    "scripts": {
+        "tsc": "tsc *.ts"
+    }
+}
