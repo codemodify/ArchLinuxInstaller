@@ -5,8 +5,7 @@ declare var Buffer;
 
 namespace LinuxInstaller.Contracts {
     export interface CmdExecDelegate {
-        // (error: string, stdout: string, stderr: string): void;
-        (): void;
+        (error: string, stdout: string, stderr: string): void;
     }
 
     export interface UserInputDelegate {
@@ -370,18 +369,10 @@ namespace LinuxInstaller.Helpers {
     }
 
     export function RunSystemCommand(command: string, args: string, onFinish: Contracts.CmdExecDelegate) {
-        // var exec = require("child_process").exec;
-        // exec(commandWithArgs, function(error, stdout, stderr) {            
-        //     onFinish(error, stdout, stderr);
-        // });
-
-        // process.stdout.write(`${commandWithArgs}`+ "\r\n");
-
-        var spawn = require("child_process").spawn;
-        var child = spawn(command, args);
-            child.stdout.on("end", function () {
-                onFinish();
-            });
+        var exec = require("child_process").execFile;
+        exec(command, args, "", function(error, stdout, stderr) {            
+            onFinish(error, stdout, stderr);
+        });
     }
 
     var _output: InputOutput.Output = new InputOutput.Output();
