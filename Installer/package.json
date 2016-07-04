@@ -2,7 +2,7 @@
     "name": "LinuxInstaller",
     "version": "1.0.0",
     "devDependencies" : {
-        "tsc" : "*"
+        "typescript" : "*"
     },
     "scripts": {
         "tsc": "tsc *.ts"
