@@ -369,10 +369,12 @@ namespace LinuxInstaller.Helpers {
     }
 
     export function RunSystemCommand(commandWithArgs: string, onFinish: Contracts.CmdExecDelegate) {
-        var exec = require("child_process").exec;
-        exec(commandWithArgs, function(error, stdout, stderr) {            
-            onFinish(error, stdout, stderr);
-        });            
+        // var exec = require("child_process").exec;
+        // exec(commandWithArgs, function(error, stdout, stderr) {            
+        //     onFinish(error, stdout, stderr);
+        // });
+
+        process.stdout.write(`${commandWithArgs}`);
     }
 
     var _output: InputOutput.Output = new InputOutput.Output();
