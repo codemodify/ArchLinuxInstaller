@@ -2,7 +2,9 @@
     "name": "LinuxInstaller",
     "version": "1.0.0",
     "devDependencies" : {
-        "typescript" : "*"
+        "typescript" : "*",
+        "colors": "*",
+        "asynquence": "*"
     },
     "scripts": {
         "compile": "tsc --outFile Installer.js *.ts"
