@@ -17,7 +17,7 @@ namespace LinuxInstaller.Arch {
     class DiskPartitionTask implements Contracts.Task {
         Execute() {
 
-            var cmd: string = "";
+            var cmd: string = "ls";
 
             Helpers.Logger().LogInfo("Executing: " + cmd);
 
