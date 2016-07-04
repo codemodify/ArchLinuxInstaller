@@ -103,13 +103,13 @@ namespace LinuxInstaller.Arch {
 
             Helpers.Run()
                 .This(function (done){
-                    Helpers.RunSystemCommand("mkfs.msdos " + thisRef._efi, function(error: string, stdout: string, stderr: string) {
+                    Helpers.RunSystemCommand("mkfs.msdos", thisRef._efi, function() {
                         done();
                     });
                 })
                 .Then(function(done) {
                     if (!Helpers.IsNullOrEmpty(thisRef._swap)) {
-                        Helpers.RunSystemCommand("mkswap " + thisRef._swap, function(error: string, stdout: string, stderr: string) {
+                        Helpers.RunSystemCommand("mkswap", thisRef._swap, function() {
                             done();
                         });
                     }
@@ -118,7 +118,7 @@ namespace LinuxInstaller.Arch {
                     }
                 })
                 .Then(function(done) {
-                    Helpers.RunSystemCommand("mkfs.ext4 " + thisRef._root, function(error: string, stdout: string, stderr: string) {
+                    Helpers.RunSystemCommand("mkfs.ext4", thisRef._root, function() {
                         done();
                     });
                 })
