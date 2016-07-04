@@ -137,16 +137,13 @@ namespace LinuxInstaller.Logging {
 
             this._id = Helpers.NewGuid();
 
-            var PORT = 45867;
-            var HOST = 'logs4.papertrailapp.com';
-
             var dgram = require("dgram");
             this._udpClient = dgram.createSocket('udp4');
         }
 
         protected OnLog(log: string) {
-            const k_HOST: string = "";
-            const k_PORT: number = 0;
+            const k_HOST: string = "logs4.papertrailapp.com";
+            const k_PORT: number = 45867;
 
             var message = new Buffer(log);
             this._udpClient.send(message, 0, message.length, k_HOST, k_HOST, function(err, bytes) {
