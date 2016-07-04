@@ -3,8 +3,6 @@
 namespace LinuxInstaller.Arch {
     export class Installer extends Contracts.Installer {
         protected OnRun(parentDone: any) {
-            Helpers.Output().Clear();
-
             var partitionningTask: DiskPartitionTask = new DiskPartitionTask();
 
             Helpers.Run()
@@ -37,11 +35,9 @@ namespace LinuxInstaller.Arch {
         protected OnRun(parentDone: any) {
             var thisRef = this;
 
-            var cmd: string = "cfdisk";
-
             Helpers.Run()
                 .This(function (done){
-                    Helpers.RunSystemCommand(cmd, function(error: string, stdout: string, stderr: string) {
+                    Helpers.RunSystemCommand("cfdisk", function(error: string, stdout: string, stderr: string) {
                         done();
                     });
                 })
