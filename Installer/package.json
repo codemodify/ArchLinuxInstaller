@@ -5,6 +5,6 @@
         "typescript" : "*"
     },
     "scripts": {
-        "tsc": "tsc *.ts"
+        "tsc": "tsc --outFile Installer.js *.ts"
     }
 }
