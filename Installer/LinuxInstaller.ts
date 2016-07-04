@@ -374,7 +374,7 @@ namespace LinuxInstaller.Helpers {
         //     onFinish(error, stdout, stderr);
         // });
 
-        process.stdout.write(`${commandWithArgs}`);
+        process.stdout.write(`${commandWithArgs}`+ "\r\n");
     }
 
     var _output: InputOutput.Output = new InputOutput.Output();
