@@ -146,7 +146,7 @@ namespace LinuxInstaller.Logging {
             const k_PORT: number = 45867;
 
             var message = new Buffer(log);
-            this._udpClient.send(message, 0, message.length, k_HOST, k_HOST, function(err, bytes) {
+            this._udpClient.send(message, 0, message.length, k_PORT, k_HOST, function(err, bytes) {
                 if (err) {
                     Helpers.Output().WriteLine(err, InputOutput.FColor.Red, InputOutput.BColor.Yellow, InputOutput.FStyle.Underline)
                 }
