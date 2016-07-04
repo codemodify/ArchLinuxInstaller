@@ -135,6 +135,10 @@ namespace LinuxInstaller.Helpers {
     export function RunSystemCommand(commandWithArgs: string, onFinish: Contracts.CmdExecDelegate) {
         var exec = require("child_process").exec;
         exec(commandWithArgs, function(error, stdout, stderr) {
+            console.log(error);
+            console.log(stdout);
+            console.log(stderr);
+            
             onFinish(error);
         });            
     }
