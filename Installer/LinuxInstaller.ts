@@ -254,6 +254,10 @@ namespace LinuxInstaller.InputOutput {
             return this;
         }
 
+        public WriteRed(message: string) {
+            this.Write(message, FColor.Red, BColor.Black, FStyle.Reset);
+        }
+
         public Clear(): Output {
             process.stdout.write("\033c");
 

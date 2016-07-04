@@ -38,6 +38,9 @@ namespace LinuxInstaller.Arch {
             Helpers.Run()
                 .This(function (done){
                     Helpers.RunSystemCommand("cfdisk", function(error: string, stdout: string, stderr: string) {
+                        Helpers.Output().WriteRed(error);
+                        Helpers.Output().WriteRed(stdout);
+                        Helpers.Output().WriteRed(stderr);
                         done();
                     });
                 })
