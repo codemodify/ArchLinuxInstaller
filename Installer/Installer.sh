@@ -13,4 +13,4 @@ curl -o LinuxInstaller.ts \
 curl -o package.json \
         https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/Installer/package.json
 
-npm install
+npm install --loglevel=error
