@@ -1,4 +1,4 @@
-#### Automated Installer for Linux Distributions under [TFL](https://github.com/nic0lae/TrueFreeLicense)
+#### Automated Installers for Linux Distributions under [TFL](https://github.com/nic0lae/TrueFreeLicense)
 #### Assumes This Layout
 - `/boot`
 - `swap (optional)`
