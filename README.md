@@ -1,9 +1,10 @@
-###### Automated Installer for [Arch Linux](https://www.archlinux.org)
+###### Automated Installer for Linux Distributions.
 ###### License: [TFL](https://github.com/nic0lae/TrueFreeLicense)
-###### Install
-curl https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/ArchInstaller.sh | bash 
 
 ###### Assumes This Layout
 - /boot
 - swap (optional)
 - /
+
+###### Install 
+ * [Arch Linux](https://www.archlinux.org) -> curl https://raw.githubusercontent.com/nic0lae/LinuxInstaller/master/ArchInstaller.sh | bash 
