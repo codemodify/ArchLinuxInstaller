@@ -17,8 +17,21 @@ fi
 printf "\n${NC}"
 
 # System Disk
-printf "\n${YELLOW}Disk to install to. (Ex: /dev/nvme0n1): "
+printf "\n${YELLOW}Disk to install to ? (Ex: /dev/nvme0n1): "
 read -p "" disk
+
+printf "\n${YELLOW}How much RAM ?       (Ex: 16 for 16G): "
+read -p "" ram
+totalSwap = 2*$ram
+
+parted "${disk}" --script \
+	mklabel gpt \
+	mkpart ESP fat32 1MiB 551MiB \
+	set 1 esp on \
+	mkpart primary linux-swap 551MiB "${totalSwap}GiB" \
+	mkpart primary ext4 "${totalSwap}GiB" 100%
+
+
 echo "label: gpt" | sfdisk "${disk}"
 echo 'start=2048, type=83' | sudo sfdisk "${disk}"
 
