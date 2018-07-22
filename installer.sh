@@ -9,17 +9,17 @@ NC='\033[0m'
 # Internet Setup
 ping -c 1 google.com
 if [[ $? -eq 0 ]]; then
-	echo "${GREEN}INTERNET - OK"
+	printf "${GREEN}INTERNET - OK"
 else
-	echo "${RED}INTERNET NEEDED"
+	printf "${RED}INTERNET NEEDED"
 	wifi-menu
 fi
 
 # System Disk
 read -p "${YELLOW}Disk to install to. (Ex: /dev/nvme0n1): " disk
-echo "label: gpt" | sfdisk "${disk}"
+printf "label: gpt" | sfdisk "${disk}"
 
-echo 'start=2048, type=83' | sudo sfdisk "${disk}"
+printf 'start=2048, type=83' | sudo sfdisk "${disk}"
 
 
 
