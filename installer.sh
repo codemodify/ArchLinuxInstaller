@@ -1,25 +1,48 @@
 #!/bin/sh
 
-wifi-menu
-timedatectl set-ntp true
-cfdisk /dev/nvme0n1 # kill all the Windows crap, allocate like this: 512MB EFI, 2xRAM swap, what is left will be / as ext4
+# Colors Setup
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
-mkfs.fat /dev/nvme0n1p1
-mkswap /dev/nvme0n1p2
-mkfs.ext4 /dev/nvme0n1p3
+# Internet Setup
+if ping -c 1 google.com &> /dev/null
+then
+	echo "${RED}INTERNET NEEDED"
+	wifi-menu
+else
+  echo  "${GREEN}INTERNET - OK"
+fi
 
-swapon /dev/nvme0n1p2
+# System Disk
+read -p "${YELLOW}Disk to install to. Ex: /dev/nvme0n1" disk
+echo "label: gpt" | sfdisk "${disk}"
 
-mount /dev/nvme0n1p3 /mnt
-mkdir /mnt/boot
-mount /dev/nvme0n1p1 /mnt/boot
+echo 'start=2048, type=83' | sudo sfdisk /dev/sdX
 
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-pacman -S reflector --noconfirm
-reflector --verbose --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 
-pacstrap /mnt base base-devel
-genfstab -U /mnt >> /mnt/etc/fstab
 
-curl -o /mnt/root/system-setup.sh https://raw.githubusercontent.com/nic0lae/ProtheusInstaller/master/system-setup.sh
-arch-chroot /mnt sh /root/system-setup.sh
+# cfdisk "${disk}"
+
+# mkfs.fat "${disk}p1"
+# mkswap ${disk}.p2
+# mkfs.ext4 ${disk}.p3
+
+# swapon ${disk}.p2
+
+# mount ${disk}.p3 /mnt
+# mkdir /mnt/boot
+# mount ${disk}.p1 /mnt/boot
+
+# timedatectl set-ntp true
+
+# cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+# pacman -S reflector --noconfirm
+# reflector --verbose --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
+
+# pacstrap /mnt base base-devel
+# genfstab -U /mnt >> /mnt/etc/fstab
+
+# curl -o /mnt/root/system-setup.sh https://raw.githubusercontent.com/nic0lae/ProtheusInstaller/master/system-setup.sh
+# arch-chroot /mnt sh /root/system-setup.sh
