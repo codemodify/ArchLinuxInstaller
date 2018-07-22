@@ -17,9 +17,9 @@ fi
 printf "\n${NC}"
 
 # System Disk
-read -p "\n${YELLOW}Disk to install to. (Ex: /dev/nvme0n1): " disk
+printf "\n${YELLOW}Disk to install to. (Ex: /dev/nvme0n1): "
+read -p "" disk
 echo "label: gpt" | sfdisk "${disk}"
-
 echo 'start=2048, type=83' | sudo sfdisk "${disk}"
 
 
