@@ -22,7 +22,7 @@ read -p "" disk
 
 printf "\n${YELLOW}How much RAM ?       (Ex: 16 for 16G): "
 read -p "" ram
-totalSwap = 2*$ram
+totalSwapEnd=$((2*$ram+550))
 
 parted "${disk}" --script \
 	mklabel gpt \
@@ -32,8 +32,8 @@ parted "${disk}" --script \
 	mkpart primary ext4 "${totalSwap}GiB" 100%
 
 
-echo "label: gpt" | sfdisk "${disk}"
-echo 'start=2048, type=83' | sudo sfdisk "${disk}"
+# echo "label: gpt" | sfdisk "${disk}"
+# echo 'start=2048, type=83' | sudo sfdisk "${disk}"
 
 
 
