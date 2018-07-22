@@ -7,7 +7,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Internet Setup
-if ping -c 1 google.com &> /dev/null
+ping -c 1 google.com
 if [[ $? -eq 0 ]]; then
 	echo "${GREEN}INTERNET - OK"
 else
